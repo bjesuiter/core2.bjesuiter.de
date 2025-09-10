@@ -1,9 +1,12 @@
-import { createRouter as createTanstackSolidRouter } from "@tanstack/solid-router";
+import { createRouter as createTanstackSolidRouter, Link } from "@tanstack/solid-router";
 import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {
   const router = createTanstackSolidRouter({
     defaultErrorComponent: err => <div>{err.error.stack}</div>,
+    defaultNotFoundComponent: () => <div>Something was not found, please go back to root.
+      <Link to="/">Go to home</Link>
+    </div>,
     routeTree,
     defaultPreload: "intent",
     defaultStaleTime: 5000,
