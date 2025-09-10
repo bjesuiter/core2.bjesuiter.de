@@ -14,7 +14,7 @@ const EnvSchema = v.object({
     TURSO_AUTH_TOKEN: v.string(),
 })
 
-function initEnvStore(envs: Record<string, string>) {
+function initEnvStore(envs: NodeJS.ProcessEnv) {
     // This will throw if the envs are not valid
     const parsedEnv = v.parse(EnvSchema, envs);
 
@@ -25,7 +25,7 @@ function initEnvStore(envs: Record<string, string>) {
 }
 
 // the export of my env store
-export const envStore = initEnvStore(import.meta.env);
+export const envStore = initEnvStore(process.env);
 
 // some shortcuts for common checks
 export const isRunningOnDenoDeploy = envStore.STAGE === "deno_deploy";
