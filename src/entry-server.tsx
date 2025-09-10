@@ -7,6 +7,9 @@ const routerLoad = async (event: FetchEvent) => {
   const url = new URL(event.request.url);
   const path = url.href.replace(url.origin, "");
 
+  // This only primes the tanstack router for the given path from the request 
+  // The "real" mounting happens via the <RouterProvider /> component in the /src/app.tsx file, which is auto-discovered by solidjs start
+
   router.update({
     history: createMemoryHistory({
       initialEntries: [path]
