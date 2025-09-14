@@ -2,6 +2,11 @@
 import { createHandler, FetchEvent, StartServer } from "@solidjs/start/server";
 import { createMemoryHistory } from "@tanstack/solid-router";
 import { router } from "./router";
+import { envStore } from './lib/envStore';
+
+// bjesuiter playground code 
+console.log(`Found env vars on server only`, envStore);
+// bjesuiter playground code end
 
 const routerLoad = async (event: FetchEvent) => {
   const url = new URL(event.request.url);
@@ -19,6 +24,9 @@ const routerLoad = async (event: FetchEvent) => {
   await router.load();
 };
 
+// @bjesuiter: SolidJS SERVER ENTRYPOINT, renders the SoliJS Server
+// primes the tanstack router for the given path from the request with the routerLoad function
+// seeks the app.tsx file in the src folder and uses it as the root component to render
 export default createHandler(
   () => (
     <StartServer

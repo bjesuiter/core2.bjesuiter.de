@@ -1,6 +1,7 @@
 import { createRouter as createTanstackSolidRouter, Link } from "@tanstack/solid-router";
 import { routeTree } from "./routeTree.gen";
 
+
 export function createRouter() {
   const router = createTanstackSolidRouter({
     defaultErrorComponent: err => <div>{err.error.stack}</div>,
@@ -15,6 +16,7 @@ export function createRouter() {
   return router;
 }
 
+// @bjesuiter: this router is the tanstack router instance
 export const router = createRouter();
 
 // Register things for typesafety
