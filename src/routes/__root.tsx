@@ -3,17 +3,19 @@ import { HeadContent, Link, Outlet, createRootRoute } from "@tanstack/solid-rout
 import { clientOnly } from "@solidjs/start";
 import { Suspense } from "solid-js";
 import { Portal } from 'solid-js/web';
-import { envStore, isRunningOnDenoDeploy } from '~/lib/envStore';
+import { getStage, getIsRunningOnDenoDeploy } from '~/server/serverInfo';
 
 
 const Devtools = clientOnly(() => import("../components/Devtools"));
 
 export const Route = createRootRoute({
   component: RootComponent, 
-  head: () => {
+  head: async () => {
     let title = "coresvc2";
+    const isRunningOnDenoDeploy = await getIsRunningOnDenoDeploy();
     if (!isRunningOnDenoDeploy) {
-      title += ` (${envStore.STAGE})`;
+      const stage = await getStage();
+      title += ` (${stage})`;
     }
     return {
       meta: [

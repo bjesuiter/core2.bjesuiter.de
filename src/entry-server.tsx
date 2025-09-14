@@ -2,11 +2,7 @@
 import { createHandler, FetchEvent, StartServer } from "@solidjs/start/server";
 import { createMemoryHistory } from "@tanstack/solid-router";
 import { router } from "./router";
-import { envStore } from './lib/envStore';
 
-// bjesuiter playground code 
-console.log(`Found env vars on server only`, envStore);
-// bjesuiter playground code end
 
 const routerLoad = async (event: FetchEvent) => {
   const url = new URL(event.request.url);
