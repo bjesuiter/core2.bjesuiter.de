@@ -9,7 +9,10 @@ import { getStage, getIsRunningOnDenoDeploy } from '~/server/serverInfo';
 const Devtools = clientOnly(() => import("../components/Devtools"));
 
 export const Route = createRootRoute({
-  component: RootComponent, 
+  component: RootComponent,
+  // CAUTION: this head function runs on the server AND the client! 
+  // make sure to only use server-only functions here 
+  // (which automatically run as simple functions on the server and do api calls from client-side functions)
   head: async () => {
     let title = "coresvc2";
     const isRunningOnDenoDeploy = await getIsRunningOnDenoDeploy();
