@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/solid-router";
 import Counter from "~/components/Counter";
 
 export const Route = createFileRoute("/")({
-  component: RouteComponent
+  component: RouteComponent, 
 });
 
 function RouteComponent() {
