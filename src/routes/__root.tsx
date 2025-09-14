@@ -3,19 +3,26 @@ import { HeadContent, Link, Outlet, createRootRoute } from "@tanstack/solid-rout
 import { clientOnly } from "@solidjs/start";
 import { Suspense } from "solid-js";
 import { Portal } from 'solid-js/web';
+import { envStore, isRunningOnDenoDeploy } from '~/lib/envStore';
 
 
 const Devtools = clientOnly(() => import("../components/Devtools"));
 
 export const Route = createRootRoute({
   component: RootComponent, 
-  head: () => ({
-    meta: [
-      {
-        title: "coresvc2"
-      }
-    ]
-  })
+  head: () => {
+    let title = "coresvc2";
+    if (!isRunningOnDenoDeploy) {
+      title += ` (${envStore.STAGE})`;
+    }
+    return {
+      meta: [
+        {
+          title: title
+        }
+      ]
+    }
+  }
 });
 
 function RootComponent() {
